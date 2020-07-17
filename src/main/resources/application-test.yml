@@ -1,0 +1,36 @@
+## YAML Template.
+---
+jwt.secret: 7h1nkm1cr053rv1c35
+configuration.source: CONFIGURATION-SERVICE
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgresDB:5432/postgres
+    username: postgres
+    password: docker
+    platform: postgres
+    initialization-mode: always
+ 
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    show-sql: false
+    
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+## spring actuator config
+management:
+ 
+  security:
+    enabled: false ## you should seriously consider enabling actuator security
+  endpoints:
+    web:
+      base-path: /mgmt
+      exposure:

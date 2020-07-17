@@ -1,0 +1,11 @@
+add change password
+refactor package and class name
+i18n
+
+insert default administrator password
+
+add sleuth support
+
+externalize configuration
+
+convert application.properties to yml

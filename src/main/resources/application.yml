@@ -1,0 +1,94 @@
+jwt.secret: 7h1nkm1cr053rv1c35
+controller.cors.origin: http://localhost:8080
+
+active.services.required.for.authentication: ACCOUNT-HISTORY-SERVICE,ACCOUNT-PROFILE-SERVICE,ADMINISTRATION-SERVICE,AZN-SERVICE,CONTENT-SERVICE,SMS-OUTBOUND-SERVICE
+ 
+
+spring:
+ 
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+      
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: docker
+    platform: postgres
+    initialization-mode: always
+  
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+ 
+  cloud:
+    stream:
+      bindings:
+        accountEventChannel:
+          destination: AccountEvents
+    default:
+      contentType: application/json
+ 
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    show-sql: false
+    
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+            
+            
+management:
+  endpoints:
+    metrics:
+      sensitive: false
+    web:
+      exposure:
+        include: info,health,prometheus
+        
+management.metrics.tags.application: ${spring.application.name} 
+        
+        
+eureka:
+  client:
+    serviceURL:
+      defaultZone: http://localhost:8761
+    healthcheck:
+      enabled: true
+    
+    
+server:
+  error:
+    whitelabel:
+      enabled: false
+      
+ 
+      
+
+# if true the application will automatically create the
+# admin user 
+admin:
+  user:
+    create: true
+    email: admin@thinkmicroservices.com
+    password: Password_1
+       
+      
+    
+        
+    
+
+ 
+
+
+ 
+ 
